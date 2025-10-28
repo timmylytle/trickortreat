@@ -3,7 +3,7 @@ import tweepy
 import RPi.GPIO as GPIO
 from gpiozero import Servo
 from time import sleep
-from picamera import PiCamera
+#from picamera2 import PiCamera
 
 import secrets 
 import config
@@ -15,7 +15,7 @@ GPIO.setup(config.trickinput, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # Set IO fo
 GPIO.setup(config.treatinput, GPIO.IN, pull_up_down = GPIO.PUD_DOWN) # Set IO for button press 'Treat'
 
 #Define the Camera
-cam = PiCamera() 
+#cam = PiCamera() 
 
 # Function to open lid of candy bucket
 def open():
@@ -45,20 +45,20 @@ def move_stop():
 
 # Function that starts camera hardware
 # This has to be a seperate function because of delay
-def camera_start():
-    cam.start_preview()
+#def camera_start():
+#    cam.start_preview()
 
 # Function that will snap 4 pictures and store locally
-def camera_snap():
-    picnum = 0
-    for i in range (4):
-        cam.capture('images/img_%s.jpg' %picnum)
-        picnum += 1 #increment the picnum by 1
-        sleep (.5) #delay between pictures
+#def camera_snap():
+#    picnum = 0
+#    for i in range (4):
+#        cam.capture('images/img_%s.jpg' %picnum)
+#        picnum += 1 #increment the picnum by 1
+#        sleep (.5) #delay between pictures
 
 # Function that will stop camera hardware    
-def camera_stop():    
-    cam.stop_preview()
+#def camera_stop():    
+#    cam.stop_preview()
 
 
 # Function that posts to twitter API, post includes images and message based on input recieved
@@ -78,16 +78,16 @@ while (1):
         if (GPIO.input(config.trickinput) == 1):
                 print ("Button Press Detected")
                 print ("They choose Trick!!!")
-                camera_start()
+#                camera_start()
                 sound(config.tricksound1)
                 move_start()
-                camera_snap()
+#                camera_snap()
                 sleep(1)
                 print ("shutting it down")
                 move_stop()
                 sound(config.tricksound2)
-                camera_stop()
-                tweet("TRICK")
+#                camera_stop()
+#                tweet("TRICK")
                 print("End of Trick")
         #Treat input
         elif (GPIO.input(config.treatinput) == 1):
@@ -96,16 +96,17 @@ while (1):
                 sound(config.treatsound1)
                 sleep(1)
                 open()
-                camera_start()
+#                camera_start()
                 sleep(5)
+
                 sound(config.treatsound2)
                 move_start()
-                camera_snap()
+#                camera_snap()
                 print("shutting it down")
                 move_stop()
                 close()
                 sound(config.treatsound3)
-                camera_stop()
-                tweet('TREAT')
+#                camera_stop()
+#                tweet('TREAT')
                 print ("End Treat")
 
