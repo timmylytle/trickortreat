@@ -22,7 +22,7 @@ https://youtube.com/shorts/2BGu9tIV1tE?feature=share
 
 Install PIP
 ```
-sudo apt install python3-pip
+sudo apt install python3-pip mpg123 python3-lgpio
 ```
 
 Install python libraries
