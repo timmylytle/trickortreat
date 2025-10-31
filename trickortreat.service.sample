@@ -24,7 +24,7 @@ StandardError=journal
 SyslogIdentifier=trickortreat
 
 # Access to GPIO, audio, and camera if needed
-SupplementaryGroups=gpio,audio,video
+# SupplementaryGroups=gpio,audio,video
 
 [Install]
 WantedBy=multi-user.target
