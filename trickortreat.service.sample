@@ -6,8 +6,8 @@ After=network-online.target sound.target
 [Service]
 Type=simple
 # If GPIO permissions complain, change to User=root (or keep pi and add to gpio group).
-User=pi
-Group=pi
+User=trickortreat
+Group=trickortreat
 WorkingDirectory=/opt/trickortreat
 
 # Use your virtualenv's Python; or replace with /usr/bin/python3
