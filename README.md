@@ -60,6 +60,8 @@ Modify `config.py` if changes are desired, like new GPIO PIN numbers or differen
 - `treatsound3` path to thrid sound played in treat function
 
 
+
+
 ## Make Connections
 
 connection diagram goes here
@@ -71,6 +73,29 @@ Fill the candy bucket! and run the following command to start the fun
 ```
 python3 main.py
 ```
+
+## Create SystemD service
+
+### Create User/group
+```
+sudo groupadd -f trickortreat
+sudo useradd -r -m -d /home/trickortreat -s /usr/sbin/nologin -g trickortreat trickortreat
+sudo usermod -aG gpio,audio,video trickortreat
+```
+
+### Create service and Start/Enable
+```
+cp trickortreat,service.sample /etc/systemd/system/trickortreat.service
+```
+
+Modify Settings as needed
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable trickortreat.service
+sudo systemctl start trickortreat.service
+```
+
 
 
 
