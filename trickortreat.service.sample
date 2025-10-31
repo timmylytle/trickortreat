@@ -1,0 +1,30 @@
+[Unit]
+Description=Trick-or-Treat Machine (GPIO + sound)
+Wants=network-online.target
+After=network-online.target sound.target
+
+[Service]
+Type=simple
+# If GPIO permissions complain, change to User=root (or keep pi and add to gpio group).
+User=pi
+Group=pi
+WorkingDirectory=/opt/trickortreat
+
+# Use your virtualenv's Python; or replace with /usr/bin/python3
+ExecStart=/opt/trickortreat/venv/bin/python -u /opt/trickortreat/main.py
+
+# Helpful defaults
+Environment=PYTHONUNBUFFERED=1
+Restart=on-failure
+RestartSec=3
+KillSignal=SIGINT
+TimeoutStopSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=trickortreat
+
+# Access to GPIO, audio, and camera if needed
+SupplementaryGroups=gpio,audio,video
+
+[Install]
+WantedBy=multi-user.target
